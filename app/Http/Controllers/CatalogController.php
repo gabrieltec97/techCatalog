@@ -12,7 +12,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return view('catalog.catalog');
+        $products = Product::latest()->get();
+        return view('catalog.catalog', compact('products'));
     }
 
     /**
