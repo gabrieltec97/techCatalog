@@ -54,7 +54,7 @@
                     <ul class="nav ms-3 ps-1 py-1">
                         <!-- Subitem: Ver Catálogo -->
                         <li class="nav-item">
-                            <a class="nav-link py-1 px-2" href="#">
+                            <a class="nav-link py-1 px-2" href="{{ route('catalog.index') }}">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-list text-primary text-sm opacity-10"></i>
                                 </div>
@@ -63,7 +63,7 @@
                         </li>
                         <!-- Subitem: Novo Cadastro -->
                         <li class="nav-item">
-                            <a class="nav-link py-1 px-2" href="#">
+                            <a class="nav-link py-1 px-2" href="{{ route('item.create') }}">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-plus text-success text-sm opacity-10"></i>
                                 </div>
