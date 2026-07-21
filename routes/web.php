@@ -14,10 +14,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/catalogo', [CatalogController::class, 'index'])->name('catalog.index');
-    Route::get('/novo-cadastro', [CatalogController::class, 'create'])->name('item.create');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('/catalogo', CatalogController::class);
 });
 
 require __DIR__.'/auth.php';

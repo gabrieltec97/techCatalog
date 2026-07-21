@@ -27,7 +27,7 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo $request->model;
     }
 
     /**
