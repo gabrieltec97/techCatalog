@@ -1,6 +1,21 @@
 @extends('layouts.argon')
 
 @section('content')
+    <style>
+        .field-animate {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .field-animate.field-fading {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+        .field-animate.field-hidden {
+            display: none !important;
+        }
+    </style>
+
     <div class="card mb-4">
         <div class="card-body p-4 d-flex align-items-center justify-content-between">
             <div>
@@ -55,7 +70,7 @@
                         <input type="text" id="model" name="model" class="form-control" placeholder="Ex: iPhone 13 Pro Max ou Galaxy S23" required>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-storage">
                         <label for="storage" class="form-label">Armazenamento Interno</label>
                         <select name="storage" id="storage" class="form-control cursor-pointer">
                             <option value="" selected disabled>Selecione a capacidade</option>
@@ -69,7 +84,7 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-ram">
                         <label for="ram" class="form-label">Memória RAM</label>
                         <select name="ram" id="ram" class="form-control cursor-pointer">
                             <option value="" selected disabled>Selecione a memória RAM</option>
@@ -103,7 +118,7 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <div class="col-12 col-md-6 col-lg-3 mb-3 field-animate" id="wrapper-grade">
                         <label for="grade" class="form-label">Grau Estético</label>
                         <select name="grade" id="grade" class="form-control cursor-pointer">
                             <option value="" selected disabled>Selecione a condição estética</option>
@@ -125,7 +140,7 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <div class="col-12 col-md-6 col-lg-3 mb-3 field-animate" id="wrapper-battery">
                         <label for="battery" class="form-label">Saúde da Bateria (%)</label>
                         <div class="input-group">
                             <input type="number" min="0" max="100" id="battery" name="battery" class="form-control" placeholder="Ex: 88">
@@ -133,7 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <div class="col-12 col-md-6 col-lg-3 mb-3 field-animate" id="wrapper-color">
                         <label for="color" class="form-label">Cor</label>
                         <select name="color" id="color" class="form-control cursor-pointer">
                             <option value="" selected disabled>Selecione a cor</option>
@@ -170,12 +185,12 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col-12 col-md-6 mb-3 field-animate" id="wrapper-repairs">
                         <label for="repairs" class="form-label">Histórico de Reparos / Peças Trocadas</label>
                         <input type="text" id="repairs" name="repairs" class="form-control" placeholder="Ex: Tela trocada (original), Bateria nova, Nunca aberto">
                     </div>
 
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col-12 col-md-6 mb-3 field-animate" id="wrapper-accessories">
                         <label for="accessories" class="form-label">Acessórios Inclusos</label>
                         <input type="text" id="accessories" name="accessories" class="form-control" placeholder="Ex: Caixa original, carregador, cabo e capa de proteção">
                     </div>
@@ -189,12 +204,12 @@
             </div>
             <div class="card-body pt-0">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <label for="imei" class="form-label">IMEI / Número de Série</label>
-                        <input type="text" id="imei" name="imei" class="form-control" placeholder="Insira os 15 dígitos do IMEI">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3" id="wrapper-imei">
+                        <label for="imei" id="label-imei" class="form-label">IMEI / Número de Série</label>
+                        <input type="text" id="imei" name="imei" class="form-control" placeholder="Insira os 15 dígitos do IMEI ou número de série">
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3" id="wrapper-guarantee">
                         <label for="guarantee" class="form-label">Garantia</label>
                         <select name="guarantee" id="guarantee" class="form-control cursor-pointer">
                             <option value="" selected disabled>Selecione a garantia</option>
@@ -206,7 +221,7 @@
                         </select>
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-account-status">
                         <label for="account_status" class="form-label">Contas Vinculadas (iCloud / Google)</label>
                         <select name="account_status" id="account_status" class="form-control cursor-pointer">
                             <option value="Liberado" selected>Livre / Desvinculado (Pronto p/ uso)</option>
@@ -269,8 +284,107 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2 mb-5">
-            <button type="button" class="btn btn-light me-2">Cancelar</button>
+            <a href="{{ route('catalogo.index') }}" class="btn btn-light me-2">Cancelar</a>
             <button type="submit" class="btn btn-success">Salvar Produto</button>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deviceSelect = document.getElementById('device');
+            const conditionSelect = document.getElementById('condition');
+
+            const wrappers = {
+                storage: document.getElementById('wrapper-storage'),
+                ram: document.getElementById('wrapper-ram'),
+                battery: document.getElementById('wrapper-battery'),
+                grade: document.getElementById('wrapper-grade'),
+                repairs: document.getElementById('wrapper-repairs'),
+                accountStatus: document.getElementById('wrapper-account-status'),
+                labelImei: document.getElementById('label-imei')
+            };
+
+            function hideElement(el) {
+                if (!el || el.tagName === 'LABEL') return;
+
+                // Inicia o fade out de opacidade
+                el.classList.add('field-fading');
+
+                // Espera a animação acabar (250ms) e remove do layout com display:none
+                setTimeout(() => {
+                    if (el.classList.contains('field-fading')) {
+                        el.classList.add('field-hidden');
+                    }
+                }, 250);
+            }
+
+            function showElement(el) {
+                if (!el || el.tagName === 'LABEL') return;
+
+                // Tira o display:none para reentrar no fluxo do Grid
+                el.classList.remove('field-hidden');
+
+                // Pequeno delay pro browser processar a remoção do display:none antes de animar a opacidade
+                setTimeout(() => {
+                    el.classList.remove('field-fading');
+                }, 10);
+            }
+
+            function toggleFields() {
+                const device = deviceSelect.value;
+                const condition = conditionSelect.value;
+
+                // Lista de elementos a ocultar na rodada atual
+                const toHide = new Set();
+
+                // 1. REGRAS POR TIPO DE DISPOSITIVO
+                if (device === 'Fone' || device === 'Acessório') {
+                    toHide.add(wrappers.storage);
+                    toHide.add(wrappers.ram);
+                    toHide.add(wrappers.accountStatus);
+                    if (wrappers.labelImei) wrappers.labelImei.textContent = 'Número de Série (S/N)';
+                } else if (device === 'Smartwatch') {
+                    toHide.add(wrappers.ram);
+                    if (wrappers.labelImei) wrappers.labelImei.textContent = 'IMEI / Número de Série';
+                } else {
+                    if (wrappers.labelImei) wrappers.labelImei.textContent = 'IMEI / Número de Série';
+                }
+
+                // 2. REGRAS POR CONDIÇÃO (NOVO vs DEMAIS)
+                if (condition === 'Novo') {
+                    toHide.add(wrappers.battery);
+                    toHide.add(wrappers.grade);
+                    toHide.add(wrappers.repairs);
+                }
+
+                // Aplica visibilidade nos elementos
+                Object.values(wrappers).forEach(el => {
+                    if (toHide.has(el)) {
+                        hideElement(el);
+                    } else {
+                        showElement(el);
+                    }
+                });
+            }
+
+            function clearHiddenInputs() {
+                Object.values(wrappers).forEach(element => {
+                    if (element && element.classList.contains('field-hidden')) {
+                        const input = element.querySelector('input, select');
+                        if (input) input.value = '';
+                    }
+                });
+            }
+
+            // Listeners de mudança nos seletores
+            deviceSelect.addEventListener('change', toggleFields);
+            conditionSelect.addEventListener('change', toggleFields);
+
+            // Limpa campos escondidos no momento do envio
+            document.querySelector('form').addEventListener('submit', clearHiddenInputs);
+
+            // Executa na carga inicial
+            toggleFields();
+        });
+    </script>
 @endsection

@@ -45,7 +45,7 @@ class CatalogController extends Controller
             'accessories'    => 'nullable|string|max:255',
             'imei'           => 'nullable|string|max:50',
             'guarantee'      => 'nullable|string|max:100',
-            'account_status' => 'required|string|max:100',
+            'account_status' => 'nullable|string|max:100',
             'cost_price'     => 'nullable|numeric|min:0',
             'selling_price'  => 'required|numeric|min:0',
             'quantity'       => 'required|integer|min:1',
@@ -53,10 +53,22 @@ class CatalogController extends Controller
             'images.*'       => 'image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
+        //"Não se aplica" nos campos condicionais em texto que vieram nulos/vazios
+        $textFields = ['storage', 'ram', 'grade', 'repairs', 'account_status'];
+
+        foreach ($textFields as $field) {
+            if (empty($validatedData[$field])) {
+                $validatedData[$field] = 'N/A';
+            }
+        }
+
+        if (!isset($validatedData['battery']) || $validatedData['battery'] === '') {
+            $validatedData['battery'] = null;
+        }
+
         $imagePaths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                // Salvando a imagem na pasta 'storage/app/public/products'.
                 $path = $image->store('products', 'public');
                 $imagePaths[] = $path;
             }
