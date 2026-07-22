@@ -402,22 +402,8 @@
             deviceSelect.addEventListener('change', toggleFields);
             conditionSelect.addEventListener('change', toggleFields);
             document.querySelector('form').addEventListener('submit', clearHiddenInputs);
+
             toggleFields();
         });
     </script>
-
-    <form action="{{ route('catalogo.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        {{-- BLOCO DE ALERT DE ERROS PARA DIAGNÓSTICO --}}
-        @if ($errors->any())
-            <div class="alert alert-danger text-white mb-4" role="alert">
-                <h6 class="text-white mb-2">Ops! O formulário possui erros de preenchimento:</h6>
-                <ul class="mb-0 text-sm">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-    @endif
 @endsection
