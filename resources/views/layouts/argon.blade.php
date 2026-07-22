@@ -4,15 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>TechCatalog - Argon Dashboard</title>
-
-    <!-- Fontes Globais -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <!-- Nucleo Icons (CDN oficial do Argon) -->
     <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="https://demos.creative-tim.com/argon-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
-
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- CSS Principal do Argon -->
@@ -32,7 +28,6 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            <!-- Dashboard -->
             <li class="nav-item">
                 <a class="nav-link active" href="#">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -42,7 +37,6 @@
                 </a>
             </li>
 
-            <!-- Submenu Catálogo -->
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#catalogoSubmenu" role="button" aria-expanded="false" aria-controls="catalogoSubmenu">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -52,7 +46,7 @@
                 </a>
                 <div class="collapse" id="catalogoSubmenu">
                     <ul class="nav ms-3 ps-1 py-1">
-                        <!-- Subitem: Ver Catálogo -->
+
                         <li class="nav-item">
                             <a class="nav-link py-1 px-2" href="{{ route('catalogo.index') }}">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -61,7 +55,7 @@
                                 <span class="sidenav-normal">Catálogo </span>
                             </a>
                         </li>
-                        <!-- Subitem: Novo Cadastro -->
+
                         <li class="nav-item">
                             <a class="nav-link py-1 px-2" href="{{ route('catalogo.create') }}">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -106,7 +100,6 @@
                 </div>
             </li>
 
-            <!-- Usuários -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

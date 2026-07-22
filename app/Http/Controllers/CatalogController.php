@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CatalogController extends Controller
 {
@@ -98,6 +99,12 @@ class CatalogController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if (!empty($product->images) && is_array($product->images)) {
+            Storage::disk('public')->delete($product->images);
+        }
+
+        $product->delete();
+        return redirect()->route('catalogo.index')->with('deleted', 'Produto deletado com sucesso!');
     }
 }

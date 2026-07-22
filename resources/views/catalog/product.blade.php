@@ -16,7 +16,7 @@
                 <a href="{{ route('catalogo.edit', $product->id) }}" class="btn btn-warning btn-sm mb-0 me-2">
                     <i class="fa-solid fa-pen-to-square me-1"></i> Editar
                 </a>
-                <form action="{{ route('catalogo.destroy', $product->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+                <form action="{{ route('catalogo.destroy', $product->id) }}" method="POST" class="d-inline-block">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm mb-0">
@@ -151,7 +151,6 @@
                     </div>
                 </div>
 
-                <!-- Descrição Adicional / Observações -->
                 @if($product->description)
                     <div class="col-12 mt-4">
                         <div class="border p-3 border-radius-lg bg-white">

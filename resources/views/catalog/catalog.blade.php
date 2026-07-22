@@ -1,7 +1,6 @@
 @extends('layouts.argon')
 
 @section('content')
-    <!-- Topo / Cabeçalho da Página -->
     <div class="card mb-4">
         <div class="card-body p-4 d-flex align-items-center justify-content-between">
             <div>
@@ -14,14 +13,11 @@
         </div>
     </div>
 
-    <!-- Grid de Cards do Catálogo -->
     <div class="row">
         @forelse ($products as $product)
             <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4">
-                <!-- overflow-hidden garante que a borda arredondada do topo seja respeitada -->
                 <div class="card h-100 shadow-sm border-0 overflow-hidden">
 
-                    <!-- Imagem do Produto + Badge -->
                     <div class="position-relative text-center bg-light p-3">
                         @if (!empty($product->images) && count($product->images) > 0)
                             <img src="{{ Storage::url($product->images[0]) }}"
@@ -35,26 +31,21 @@
                                  style="height: 180px; object-fit: contain;">
                         @endif
 
-                        <!-- Badge de Condição -->
                         <span class="badge position-absolute top-0 start-0 m-3 {{ $product->condition == 'Novo' ? 'bg-success' : 'bg-warning' }}">
                             {{ $product->condition }}
                         </span>
                     </div>
 
-                    <!-- Corpo do Card -->
                     <div class="card-body d-flex flex-column justify-content-between p-3">
                         <div>
-                            <!-- Fabricante / Capacidade -->
                             <span class="text-uppercase text-xs font-weight-bolder text-muted d-block mb-1">
                                 {{ $product->manufacturer }} • {{ $product->storage ?? 'N/A' }}
                             </span>
 
-                            <!-- Título do Anúncio -->
                             <h6 class="card-title font-weight-bold mb-2 text-truncate" title="{{ $product->title }}">
                                 {{ $product->title }}
                             </h6>
 
-                            <!-- Informações Extras (Saúde da Bateria e Grau Estético) -->
                             <div class="text-xs text-muted mb-3">
                                 @if($product->battery)
                                     <span class="me-2"><i class="fa-solid fa-battery-half text-success me-1"></i> {{ $product->battery }}%</span>
@@ -65,7 +56,6 @@
                             </div>
                         </div>
 
-                        <!-- Preço e Botão de Ação -->
                         <div class="pt-2 border-top d-flex align-items-center justify-content-between">
                             <div>
                                 <small class="text-xxs text-muted d-block">Preço</small>
@@ -83,7 +73,6 @@
                 </div>
             </div>
         @empty
-            <!-- Estado Vazio (Sem produtos no banco) -->
             <div class="col-12">
                 <div class="card text-center p-5">
                     <div class="card-body">
