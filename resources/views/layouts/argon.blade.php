@@ -74,6 +74,38 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#vendasSubmenu" role="button" aria-expanded="false" aria-controls="vendasSubmenu">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-cart-shopping text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Vendas</span>
+                </a>
+                <div class="collapse" id="vendasSubmenu">
+                    <ul class="nav ms-3 ps-1 py-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link py-1 px-2" href="#">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="fa-solid fa-cash-register text-primary text-sm opacity-10"></i>
+                                </div>
+                                <span class="sidenav-normal"> Nova Venda </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link py-1 px-2" href="#">
+                                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="fa-solid fa-clock-rotate-left text-info text-sm opacity-10"></i>
+                                </div>
+                                <span class="sidenav-normal"> Histórico de Vendas </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
             <!-- Usuários -->
             <li class="nav-item">
                 <a class="nav-link" href="#">

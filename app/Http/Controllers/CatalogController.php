@@ -73,7 +73,8 @@ class CatalogController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('catalog.product', compact('product'));
     }
 
     /**
