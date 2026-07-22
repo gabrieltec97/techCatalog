@@ -84,8 +84,8 @@
                             <i class="fa-solid fa-mobile-screen me-1"></i> Dispositivo
                         </span>
                         <ul class="list-unstyled text-sm mb-0">
-                            <li class="mb-1"><strong>Fabricante:</strong> {{ $product->manufacturer }}</li>
-                            <li class="mb-1"><strong>Modelo:</strong> {{ $product->model }}</li>
+                            <li class="mb-1"><strong>Fabricante:</strong> {{ $product->manufacturer->name ?? 'N/A' }}</li>
+                            <li class="mb-1"><strong>Modelo:</strong> {{ $product->deviceModel->name ?? 'N/A' }}</li>
                             <li class="mb-1"><strong>Tipo:</strong> {{ $product->device }}</li>
                             <li class="mb-1"><strong>Armazenamento:</strong> {{ $product->storage ?? 'N/A' }}</li>
                             <li><strong>Memória RAM:</strong> {{ $product->ram ?? 'N/A' }}</li>

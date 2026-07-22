@@ -402,7 +402,6 @@
             deviceSelect.addEventListener('change', toggleFields);
             conditionSelect.addEventListener('change', toggleFields);
             document.querySelector('form').addEventListener('submit', clearHiddenInputs);
-
             toggleFields();
         });
     </script>

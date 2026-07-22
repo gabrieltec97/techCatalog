@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -30,6 +31,16 @@ class Product extends Model
         'images',
         'description',
     ];
+
+    public function manufacturer(): BelongsTo
+    {
+        return $this->belongsTo(Manufacturer::class, 'manufacturer_id');
+    }
+
+    public function deviceModel(): BelongsTo
+    {
+        return $this->belongsTo(DeviceModel::class, 'device_model_id');
+    }
 
     // Converte o campo de imagens automaticamente de/para JSON
     protected $casts = [

@@ -91,7 +91,7 @@ class CatalogController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with(['manufacturer', 'deviceModel'])->findOrFail($id);
         return view('catalog.product', compact('product'));
     }
 

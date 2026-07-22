@@ -39,18 +39,26 @@
                     <div class="card-body d-flex flex-column justify-content-between p-3">
                         <div>
                             <span class="text-uppercase text-xs font-weight-bolder text-muted d-block mb-1">
-                                {{ $product->manufacturer }} • {{ $product->storage ?? 'N/A' }}
+                                {{ $product->manufacturer->name ?? $product->manufacturer ?? 'N/A' }} • {{ $product->storage ?? 'N/A' }}
                             </span>
 
                             <h6 class="card-title font-weight-bold mb-2 text-truncate" title="{{ $product->title }}">
                                 {{ $product->title }}
                             </h6>
 
+                            {{-- Exibição dinâmica de Bateria e Condição Estética --}}
                             <div class="text-xs text-muted mb-3">
-                                @if($product->battery)
+                                {{-- Exibe Bateria (100% se for Novo e não for Fone/Acessório, ou % do banco se cadastrado) --}}
+                                @if($product->condition === 'Novo' && !in_array($product->device, ['Fone', 'Acessório']))
+                                    <span class="me-2"><i class="fa-solid fa-battery-full text-success me-1"></i> 100%</span>
+                                @elseif($product->battery)
                                     <span class="me-2"><i class="fa-solid fa-battery-half text-success me-1"></i> {{ $product->battery }}%</span>
                                 @endif
-                                @if($product->grade)
+
+                                {{-- Exibe Status Estético (Lacrado se for Novo, ou Grau se cadastrado) --}}
+                                @if($product->condition === 'Novo')
+                                    <span><i class="fa-solid fa-star text-warning me-1"></i> Lacrado</span>
+                                @elseif($product->grade)
                                     <span><i class="fa-solid fa-star text-warning me-1"></i> {{ $product->grade }}</span>
                                 @endif
                             </div>
