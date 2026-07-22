@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('working_products', function (Blueprint $table) {
+        Schema::create('device_models', function (Blueprint $table) {
             $table->id();
-            // Relaciona com a tabela 'manufacturers'. Se apagar o fabricante, apaga os modelos dele em cascata.
             $table->foreignId('manufacturer_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // Ex: iPhone 13 Pro Max, Galaxy S23
+            $table->string('name');
             $table->timestamps();
         });
     }

@@ -41,7 +41,7 @@
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <label for="device" class="form-label">Tipo de Dispositivo</label>
-                        <select name="device" id="device" class="form-control cursor-pointer" required>
+                        <select name="device" id="device" class="form-select cursor-pointer" required>
                             <option value="" selected disabled>Selecione o dispositivo</option>
                             <option value="Celular">Celular / Smartphone</option>
                             <option value="Tablet">Tablet / iPad</option>
@@ -51,28 +51,28 @@
                         </select>
                     </div>
 
+                    {{-- Fabricante / Marca vindo dinamicamente do banco --}}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <label for="manufacturer" class="form-label">Fabricante / Marca</label>
-                        <select name="manufacturer" id="manufacturer" class="form-control cursor-pointer" required>
-                            <option value="" selected disabled>Selecione a fabricante</option>
-                            <option value="Apple">Apple</option>
-                            <option value="Samsung">Samsung</option>
-                            <option value="Xiaomi">Xiaomi</option>
-                            <option value="Motorola">Motorola</option>
-                            <option value="Realme">Realme</option>
-                            <option value="Asus">Asus</option>
-                            <option value="Outro">Outro</option>
+                        <label for="manufacturer_id" class="form-label">Fabricante / Marca</label>
+                        <select name="manufacturer_id" id="manufacturer_id" class="form-select cursor-pointer" required>
+                            <option value="" selected disabled>Selecione o fabricante</option>
+                            @foreach($manufacturers as $manufacturer)
+                                <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
+                    {{-- Modelo vindo dinamicamente --}}
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <label for="model" class="form-label">Modelo</label>
-                        <input type="text" id="model" name="model" class="form-control" placeholder="Ex: iPhone 13 Pro Max ou Galaxy S23" required>
+                        <label for="working_product_id" class="form-label">Modelo</label>
+                        <select name="device_model_id" id="working_product_id" class="form-select cursor-pointer" disabled required>
+                            <option value="" selected disabled>Primeiro selecione o fabricante</option>
+                        </select>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-storage">
                         <label for="storage" class="form-label">Armazenamento Interno</label>
-                        <select name="storage" id="storage" class="form-control cursor-pointer">
+                        <select name="storage" id="storage" class="form-select cursor-pointer">
                             <option value="" selected disabled>Selecione a capacidade</option>
                             <option value="32GB">32 GB</option>
                             <option value="64GB">64 GB</option>
@@ -86,7 +86,7 @@
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-ram">
                         <label for="ram" class="form-label">Memória RAM</label>
-                        <select name="ram" id="ram" class="form-control cursor-pointer">
+                        <select name="ram" id="ram" class="form-select cursor-pointer">
                             <option value="" selected disabled>Selecione a memória RAM</option>
                             <option value="3GB">3 GB</option>
                             <option value="4GB">4 GB</option>
@@ -108,7 +108,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3 mb-3">
                         <label for="condition" class="form-label">Condição do Aparelho</label>
-                        <select name="condition" id="condition" class="form-control cursor-pointer" required>
+                        <select name="condition" id="condition" class="form-select cursor-pointer" required>
                             <option value="" selected disabled>Selecione a condição</option>
                             <option value="Novo">Novo (Lacrado)</option>
                             <option value="Seminovo">Seminovo</option>
@@ -120,7 +120,7 @@
 
                     <div class="col-12 col-md-6 col-lg-3 mb-3 field-animate" id="wrapper-grade">
                         <label for="grade" class="form-label">Grau Estético</label>
-                        <select name="grade" id="grade" class="form-control cursor-pointer">
+                        <select name="grade" id="grade" class="form-select cursor-pointer">
                             <option value="" selected disabled>Selecione a condição estética</option>
                             <optgroup label="Novos">
                                 <option value="Novo Lacrado">Novo (Lacrado na Caixa)</option>
@@ -150,7 +150,7 @@
 
                     <div class="col-12 col-md-6 col-lg-3 mb-3 field-animate" id="wrapper-color">
                         <label for="color" class="form-label">Cor</label>
-                        <select name="color" id="color" class="form-control cursor-pointer">
+                        <select name="color" id="color" class="form-select cursor-pointer">
                             <option value="" selected disabled>Selecione a cor</option>
                             <optgroup label="Cores Tradicionais">
                                 <option value="Preto">Preto</option>
@@ -211,7 +211,7 @@
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3" id="wrapper-guarantee">
                         <label for="guarantee" class="form-label">Garantia</label>
-                        <select name="guarantee" id="guarantee" class="form-control cursor-pointer">
+                        <select name="guarantee" id="guarantee" class="form-select cursor-pointer">
                             <option value="" selected disabled>Selecione a garantia</option>
                             <option value="1 ano fabricante">1 ano - Fabricante</option>
                             <option value="Restante de Garantia - Fabricante">Restante de Garantia - Fabricante</option>
@@ -223,7 +223,7 @@
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3 field-animate" id="wrapper-account-status">
                         <label for="account_status" class="form-label">Contas Vinculadas (iCloud / Google)</label>
-                        <select name="account_status" id="account_status" class="form-control cursor-pointer">
+                        <select name="account_status" id="account_status" class="form-select cursor-pointer">
                             <option value="Liberado" selected>Livre / Desvinculado (Pronto p/ uso)</option>
                             <option value="Bloqueado">Bloqueado / Com Conta</option>
                         </select>
@@ -293,6 +293,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             const deviceSelect = document.getElementById('device');
             const conditionSelect = document.getElementById('condition');
+            const manufacturerSelect = document.getElementById('manufacturer_id');
+            const modelSelect = document.getElementById('working_product_id');
 
             const wrappers = {
                 storage: document.getElementById('wrapper-storage'),
@@ -304,13 +306,43 @@
                 labelImei: document.getElementById('label-imei')
             };
 
+            // LÓGICA DE BUSCA DE MODELOS DINÂMICOS
+            manufacturerSelect.addEventListener('change', function () {
+                const manufacturerId = this.value;
+
+                modelSelect.innerHTML = '<option value="" selected disabled>Carregando modelos...</option>';
+                modelSelect.disabled = true;
+
+                if (!manufacturerId) return;
+
+                fetch(`/api/manufacturers/${manufacturerId}/models`)
+                    .then(response => response.json())
+                    .then(models => {
+                        modelSelect.innerHTML = '<option value="" selected disabled>Selecione o modelo</option>';
+
+                        if (models.length === 0) {
+                            modelSelect.innerHTML = '<option value="" selected disabled>Nenhum modelo cadastrado</option>';
+                            return;
+                        }
+
+                        models.forEach(model => {
+                            const option = document.createElement('option');
+                            option.value = model.id;
+                            option.textContent = model.name;
+                            modelSelect.appendChild(option);
+                        });
+
+                        modelSelect.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar modelos:', error);
+                        modelSelect.innerHTML = '<option value="" selected disabled>Erro ao carregar modelos</option>';
+                    });
+            });
+
             function hideElement(el) {
                 if (!el || el.tagName === 'LABEL') return;
-
-                // Inicia o fade out de opacidade
                 el.classList.add('field-fading');
-
-                // Espera a animação acabar (250ms) e remove do layout com display:none
                 setTimeout(() => {
                     if (el.classList.contains('field-fading')) {
                         el.classList.add('field-hidden');
@@ -320,11 +352,7 @@
 
             function showElement(el) {
                 if (!el || el.tagName === 'LABEL') return;
-
-                // Tira o display:none para reentrar no fluxo do Grid
                 el.classList.remove('field-hidden');
-
-                // Pequeno delay pro browser processar a remoção do display:none antes de animar a opacidade
                 setTimeout(() => {
                     el.classList.remove('field-fading');
                 }, 10);
@@ -333,11 +361,8 @@
             function toggleFields() {
                 const device = deviceSelect.value;
                 const condition = conditionSelect.value;
-
-                // Lista de elementos a ocultar na rodada atual
                 const toHide = new Set();
 
-                // 1. REGRAS POR TIPO DE DISPOSITIVO
                 if (device === 'Fone' || device === 'Acessório') {
                     toHide.add(wrappers.storage);
                     toHide.add(wrappers.ram);
@@ -350,14 +375,12 @@
                     if (wrappers.labelImei) wrappers.labelImei.textContent = 'IMEI / Número de Série';
                 }
 
-                // 2. REGRAS POR CONDIÇÃO (NOVO vs DEMAIS)
                 if (condition === 'Novo') {
                     toHide.add(wrappers.battery);
                     toHide.add(wrappers.grade);
                     toHide.add(wrappers.repairs);
                 }
 
-                // Aplica visibilidade nos elementos
                 Object.values(wrappers).forEach(el => {
                     if (toHide.has(el)) {
                         hideElement(el);
@@ -376,15 +399,26 @@
                 });
             }
 
-            // Listeners de mudança nos seletores
             deviceSelect.addEventListener('change', toggleFields);
             conditionSelect.addEventListener('change', toggleFields);
-
-            // Limpa campos escondidos no momento do envio
             document.querySelector('form').addEventListener('submit', clearHiddenInputs);
 
-            // Executa na carga inicial
             toggleFields();
         });
     </script>
+
+    <form action="{{ route('catalogo.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        {{-- BLOCO DE ALERT DE ERROS PARA DIAGNÓSTICO --}}
+        @if ($errors->any())
+            <div class="alert alert-danger text-white mb-4" role="alert">
+                <h6 class="text-white mb-2">Ops! O formulário possui erros de preenchimento:</h6>
+                <ul class="mb-0 text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+    @endif
 @endsection

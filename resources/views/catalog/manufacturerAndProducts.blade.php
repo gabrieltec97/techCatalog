@@ -68,6 +68,9 @@
                     <label for="fabricante" class="text-sm">Fabricante</label>
                     <select name="prodManufacturer" id="fabricante" class="form-select cursor-pointer">
                         <option disabled selected>Selecione</option>
+                        @foreach($manufacturers as $manufacturer)
+                            <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                        @endforeach
                     </select>
                     <label for="produto" class="text-sm mt-3">Produto</label>
                     <input type="text" class="form-control" id="produto" name="product">

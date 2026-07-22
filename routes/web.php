@@ -3,6 +3,7 @@
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ManAndProdController;
 use App\Http\Controllers\ProfileController;
+use App\Models\DeviceModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/catalogo', CatalogController::class);
     Route::resource('/fabricantes-e-produtos', ManAndProdController::class);
+});
+
+Route::get('/api/manufacturers/{manufacturerId}/models', function ($manufacturerId) {
+    return DeviceModel::where('manufacturer_id', $manufacturerId)
+        ->select('id', 'name')
+        ->orderBy('name')
+        ->get();
 });
 
 require __DIR__.'/auth.php';

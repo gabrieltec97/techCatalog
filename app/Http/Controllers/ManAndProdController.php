@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeviceModel;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class ManAndProdController extends Controller
      */
     public function index()
     {
-        return view('catalog.manufacturerAndProducts');
+        $manufacturers = Manufacturer::all();
+        return view('catalog.manufacturerAndProducts', ['manufacturers' => $manufacturers]);
     }
 
     /**
@@ -33,9 +35,11 @@ class ManAndProdController extends Controller
             $manufacturer->name = $request->manufacturer;
             $manufacturer->save();
         }else{
-            echo 'prod';
+            $product = new DeviceModel();
+            $product->manufacturer_id = $request->prodManufacturer;
+            $product->name = $request->product;
+            $product->save();
         }
-
         return redirect()->back();
     }
 

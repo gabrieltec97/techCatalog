@@ -12,8 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('device');
-            $table->string('manufacturer');
-            $table->string('model');
+
+            // Foreign Keys relacionando com as tabelas de Fabricantes e Modelos
+            $table->foreignId('manufacturer_id')->constrained()->onDelete('restrict');
+            $table->foreignId('device_model_id')->constrained()->onDelete('restrict');
+
             $table->string('storage')->nullable();
             $table->string('ram')->nullable();
 
@@ -28,11 +31,11 @@ return new class extends Migration
             $table->string('guarantee')->nullable();
             $table->string('account_status')->default('Liberado')->nullable();
 
-            $table->decimal('cost_price', 10, 2);
+            $table->decimal('cost_price', 10, 2)->nullable();
             $table->decimal('selling_price', 10, 2);
             $table->integer('quantity')->default(1);
 
-            $table->json('images')->nullable(); // Armazena o array/caminhos das fotos salvas
+            $table->json('images')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

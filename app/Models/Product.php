@@ -11,8 +11,8 @@ class Product extends Model
     protected $fillable = [
         'title',
         'device',
-        'manufacturer',
-        'model',
+        'manufacturer_id',
+        'device_model_id',
         'storage',
         'ram',
         'condition',
