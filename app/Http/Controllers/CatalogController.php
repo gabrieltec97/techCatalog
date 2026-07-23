@@ -9,27 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class CatalogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $products = Product::latest()->get();
         return view('catalog.catalog', compact('products'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $manufacturers = Manufacturer::orderBy('name')->get();
         return view('catalog.new-product', compact('manufacturers'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -85,19 +74,11 @@ class CatalogController extends Controller
         return redirect()->route('catalogo.index')
             ->with('success', 'Produto cadastrado com sucesso!');
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $product = Product::with(['manufacturer', 'deviceModel'])->findOrFail($id);
         return view('catalog.product', compact('product'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
@@ -107,10 +88,6 @@ class CatalogController extends Controller
             'manufacturers' => $manufacturers
         ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
@@ -155,10 +132,6 @@ class CatalogController extends Controller
             ->route('catalogo.index')
             ->with('success', 'Produto atualizado com sucesso!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
