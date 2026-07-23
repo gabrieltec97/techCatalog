@@ -100,7 +100,12 @@ class CatalogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $manufacturers = Manufacturer::orderBy('name')->get();
+        return view('catalog.edit-product', [
+            'product' => $product,
+            'manufacturers' => $manufacturers
+        ]);
     }
 
     /**
@@ -108,7 +113,47 @@ class CatalogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title'           => 'required|string|max:255',
+            'device'          => 'required|string',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'device_model_id' => 'required|exists:device_models,id',
+            'storage'         => 'nullable|string',
+            'ram'             => 'nullable|string',
+            'condition'       => 'required|string',
+            'grade'           => 'nullable|string',
+            'battery'         => 'nullable|integer|min:0|max:100',
+            'color'           => 'nullable|string',
+            'repairs'         => 'nullable|string',
+            'accessories'     => 'nullable|string',
+            'imei'            => 'nullable|string',
+            'guarantee'       => 'nullable|string',
+            'account_status'  => 'nullable|string',
+            'cost_price'      => 'nullable|numeric|min:0',
+            'selling_price'   => 'required|numeric|min:0',
+            'quantity'        => 'required|integer|min:1',
+            'description'     => 'nullable|string',
+            'images.*'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Até 2MB cada foto
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        if ($request->hasFile('images')) {
+            $uploadedImages = [];
+
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+                $uploadedImages[] = $path;
+            }
+
+            $existingImages = is_array($product->images) ? $product->images : json_decode($product->images, true) ?? [];
+            $validated['images'] = array_merge($existingImages, $uploadedImages);
+        }
+
+        $product->update($validated);
+        return redirect()
+            ->route('catalogo.index')
+            ->with('success', 'Produto atualizado com sucesso!');
     }
 
     /**
