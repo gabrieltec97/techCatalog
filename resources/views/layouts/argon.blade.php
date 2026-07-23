@@ -83,7 +83,7 @@
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-cash-register text-primary text-sm opacity-10"></i>
                                 </div>
-                                <span class="sidenav-normal"> Nova Venda </span>
+                                <span class="sidenav-normal"> Maiores vendedores </span>
                             </a>
                         </li>
 
