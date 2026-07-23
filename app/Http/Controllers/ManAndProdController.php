@@ -4,30 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\DeviceModel;
 use App\Models\Manufacturer;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ManAndProdController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $manufacturers = Manufacturer::all();
-        return view('catalog.manufacturerAndProducts', ['manufacturers' => $manufacturers]);
+        $manufacturers = Manufacturer::paginate(10);
+        $products = DeviceModel::paginate(10);
+        return view('catalog.manufacturerAndProducts', [
+            'manufacturers' => $manufacturers,
+            'products' => $products]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         if ($request->manufacturer){
@@ -42,36 +31,28 @@ class ManAndProdController extends Controller
         }
         return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        if ($request->manufacturer){
+            $manufacturer = Manufacturer::findOrFail($id);
+            $manufacturer->name = $request->manufacturer;
+            $manufacturer->save();
+        }else{
+            $product = DeviceModel::findOrFail($id);
+            $product->manufacturer_id = $request->prodManufacturer;
+            $product->name = $request->product;
+            $product->save();
+        }
+        return redirect()->back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        Manufacturer::destroy($id);
+        return redirect()->back();
+    }
+    public function destroyProduct(string $id)
+    {
+        DeviceModel::destroy($id);
+        return redirect()->back();
     }
 }

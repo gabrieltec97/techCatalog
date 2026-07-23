@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/catalogo', CatalogController::class);
     Route::resource('/fabricantes-e-produtos', ManAndProdController::class);
+    Route::post('/delete-product/{id}', [ManAndProdController::class, 'destroyProduct'])->name('product.destroy');
 });
 
 Route::get('/api/manufacturers/{manufacturerId}/models', function ($manufacturerId) {
